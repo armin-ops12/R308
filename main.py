@@ -59,7 +59,7 @@ class Cercle:
             raise TypeError("Le centre doit être un objet Point.")
         if rayon <= 0:
             raise ValueError("Le rayon ne peut pas être négatif ou égal à 0")
-        
+
         self.__rayon = float(rayon)
         self.__centre = centre
 
@@ -79,12 +79,18 @@ class Cercle:
 
     def est_en_intersection(self, autre: "Cercle") -> bool:
         """Vérifie l'intersection avec un autre cercle."""
+        if not isinstance(autre, Cercle):
+            raise TypeError("l'arg doit être un cercle")
+
         dist_centres = self.__centre.distancePoint(autre.__centre)
         return dist_centres <= self.__rayon + autre.__rayon
 
 
     def contient_point(self, p: Point) -> bool:
         """Vérifie si un Point A fait partie du cercle ."""
+        if not isinstance(p, Point):
+            raise TypeError("L'argument doit être un Point.")
+
         return self.__centre.distancePoint(p) <= self.__rayon
 
 
