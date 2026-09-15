@@ -10,6 +10,8 @@ class Point:
         :param x: abscisse du point
         :param y: ordonnée du point
         """
+        if not isinstance(x, float) or not isinstance(y, float):
+            raise TypeError ("Les points doivent être des nombres réel")
         self.__x = float(x)
         self.__y = float(y)
 
@@ -20,10 +22,15 @@ class Point:
         :param b: ordonnée point
         :return: distance entre les 2 points
         """
+        if not isinstance(a, float) or not isinstance(b, float):
+            raise TypeError ("Les points doivent être des nombres réel")
         return math.sqrt((self.__x - a) ** 2 + (self.__y - b) ** 2)
 
 
     def distancePoint(self, camarade: "Point") -> float:
+
+        if not isinstance(camarade, Point):
+            raise TypeError ("Camarade doit être un point")
 
         return self.distanceCoord(camarade.__x, camarade.__y)
 
@@ -45,6 +52,14 @@ class Cercle:
 
     def __init__(self, rayon: float, centre: Point=Point(0,0)):
         """Constructeur gérant l'origine par défaut."""
+
+        if not isinstance(rayon, int | float):
+            raise TypeError("Le rayon doit être un nombre réel.")
+        if centre is not None and not isinstance(centre, Point):
+            raise TypeError("Le centre doit être un objet Point.")
+        if rayon <= 0:
+            raise ValueError("Le rayon ne peut pas être négatif ou égal à 0")
+        
         self.__rayon = float(rayon)
         self.__centre = centre
 
