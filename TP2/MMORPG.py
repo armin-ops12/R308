@@ -66,8 +66,44 @@ class Mage(Personnage) :
             return self.niveau * 3
         return self.niveau
 
+
+    def __eq__(self,autre:Personnage)->bool:
+        return self.__niveau == autre.__niveau and self.__pseudo == autre.__pseudo
+
+
 class Joueur:
     def __init__(self, nom, max_personnages):
         self.__nom = nom
         self.__max_personnages = max_personnages
         self.__personnages = []
+
+    def ajt_perso (self, personnage):
+        if len (self.__personnages) >= self.__max_personnages:
+            self.__personnages.append (personnage)
+
+
+    def acceder (self, index : int ) -> Personnage :
+        return self.__personnages[index]
+
+    def acceder_nom(self, nom : str) -> Personnage :
+        for personnage in self.__personnages:
+            if personnage.nom == nom:
+                return personnage
+
+    def acces_p(self,personnage : Personnage)-> Personnage :
+        for p in self.__personnages:
+            if p == personnage:
+                return p
+
+    def supr_perso_index(self, index: int) -> Personnage:
+        return self.__personnages.pop(index)
+
+    def supr_perso_nom(self, nom: str) -> Personnage:
+        for p in self.__personnages:
+            if p.pseudo == nom:
+                return self.__personnages.remove(p)
+
+    def supr_perso_p(self, personnage : Personnage)-> Personnage:
+        for p in self.__personnages:
+            if p == personnage:
+                return self.__personnages.remove(p)
